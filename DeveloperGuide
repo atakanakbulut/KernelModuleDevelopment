@@ -1,0 +1,54 @@
+
+@@ This LKM Developer Guide created for simple kernel modules. @@
+
+Testing on ubuntu 18.04
+
+@Install package:
+
+    # os's spesific kernel source and developer kit  
+    $ sudo apt-get install build-essential linux-headers-$(uname -r)
+ 
+@Makefile parameters for used compile lkm
+
+    make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
+
+@Programming main requires
+
+     ## Headers 
+	#include <linux/module.h> /* included all modules */
+	#include <linux/kernel.h> /* KERN_INFO */
+	#include <linux/init.h>	 /* for macro */
+	#include <linux/fs.h>     /* for filp */
+	#include <asm/uaccess.h>  /* for segment descriptors */
+
+     ## Macros
+         MODULE_LICENSE("GPL") -> LKM's type of licanse
+         MODULE_AUTHOR("Atakan Akbulut") -> author
+	 MODULE_DESCRIPTION("Hello from LKM") -> you can explain lkm's descr.
+	 MODULE_VERSION("0.1"); -> version info
+
+     ## Install, remove, get lkm'm info 
+        sudo insmod module.ko -> run lkm to kernel
+        sudo rmmod module.ko -> remove from kernel
+        sudo modinfo module.ko -> get info
+
+
+@Debugging
+      ## Kernel use printk instead of printf
+	 KERN_EMERG -> mostly emergency crash
+         KERN_ALERT -> immediate action
+         KERN_CRIT
+         KERN_ERR -> for examle cannot find FUZE
+         KERN_WARNING
+         KERN_NOTICE
+	 KERN_INFO
+	 KERN_DEBUG
+      ## logs inside dmesg or /var/log/kern.log
+
+@@@@@ KERNEL_DS is instead of set_fs(get_fs()) probability higher than 5 kernel version
+
+@@@@@ read / write  functions vfs_read and vfs_write good..
+
+@@@@@ filp_open -> file open like fopen offset perhaps 0 ..
+
+
