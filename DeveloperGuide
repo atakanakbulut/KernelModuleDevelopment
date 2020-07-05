@@ -51,4 +51,6 @@ Testing on ubuntu 18.04
 
 @@@@@ filp_open -> file open like fopen offset perhaps 0 ..
 
+@@@@@ filp_open modes -> O_RDONLY, O_CREAT, O_RDWR, ...
+
 
