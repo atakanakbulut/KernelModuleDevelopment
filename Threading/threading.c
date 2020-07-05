@@ -14,7 +14,7 @@ static int kthread_func(void *arg)
 {
     for(;;)
     {
-	printk(KERN_INFO "I am thread: %s[PID = %d]\n", current->comm, current->pid);
+	printk(KERN_INFO "I am Master: %s[PID = %d]\n", current->comm, current->pid);
 	msleep(1000);
     }
 
@@ -28,19 +28,15 @@ static int __init app(void)
 	struct task_struct *ts1;
     	struct task_struct *ts2;
     	int err;
-	printk(KERN_INFO "Starting 2 threads\n");
 
-	ts1 = kthread_run(kthread_func, NULL, "thread-1");
+	ts1 = kthread_run(kthread_func, NULL, "thread-pool");
    	if (IS_ERR(ts1)) 
 	{
-            printk(KERN_INFO "ERROR: Cannot create thread ts1\n");
+            printk(KERN_INFO "ERROR: Cannot create thread pool\n");
             err = PTR_ERR(ts1);
             ts1 = NULL;
             return err;
     	}
-
-	printk(KERN_INFO "I am thread: %s[PID = %d]\n", current->comm, current->pid);
-
 	return 0; 
 } 
 

@@ -20,6 +20,9 @@ Testing on ubuntu 18.04
 	#include <linux/init.h>	 /* for macro */
 	#include <linux/fs.h>     /* for filp */
 	#include <asm/uaccess.h>  /* for segment descriptors */
+	#include <linux/kthread.h> /* for thread */	
+	#include <linux/delay.h> /* for delay msec */
+
 
      ## Macros
          MODULE_LICENSE("GPL") -> LKM's type of licanse
@@ -52,5 +55,10 @@ Testing on ubuntu 18.04
 @@@@@ filp_open -> file open like fopen offset perhaps 0 ..
 
 @@@@@ filp_open modes -> O_RDONLY, O_CREAT, O_RDWR, ...
+
+@@@@@ threading -> struct task_struct *ts1; (create task and start kthread) 
+		kthread_run(kthread_func, NULL, "thread-pool-name")
+
+@@@@@ current -> current->comm, current->pid return pool name and pid
 
 
