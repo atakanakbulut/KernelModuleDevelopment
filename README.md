@@ -2,6 +2,11 @@
 
 ## This Repository will include LKM's Examples
 
+### Host's Spec(Testing)
+        Kernel Version(5.3.0-62-generic)
+        ubuntu 18.04
+### Host's Arm Spec()
+        Raspberry pi 3
 
 ### Examples
 
