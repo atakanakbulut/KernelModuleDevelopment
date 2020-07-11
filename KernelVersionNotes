@@ -1,0 +1,19 @@
+## Kernel 4.x <================> Kernel 5.x
+ get_ds()                        KERNEL_DS  // replace get_ds function to KERNEL_DS
+
+---------------------------------------------------------------------------------
+
+if KERNEL_VERSION_FIVE
+   iov_iter_init(&msg.msg_iter, READ, &iov, 1, len);
+#else
+   msg.msg_iov = &iov;
+   msg.msg_iovlen = 1;
+#endif
+
+----------------------------------------------------------------------------------
+
+if KERNELVERSION > 3.19
+    size = sock_recvmsg(sock, &msg,msg.msg_flags);
+#else
+    size = sock_recvmsg(sock,&msg,len,msg.msg_flags);
+#endif
